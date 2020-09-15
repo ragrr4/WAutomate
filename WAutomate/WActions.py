@@ -5,35 +5,51 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC 
 from selenium.webdriver.common.keys import Keys 
-from selenium.webdriver.common.by import By 
-import time 
+from selenium.webdriver.common.by import By
+import time
+import consts
 
-# Replace below path with the absolute path 
-# to chromedriver in your computer 
-SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
-driver_path = os.path.join(SCRIPT_PATH, "chromedriver.exe")
-driver = webdriver.Chrome(driver_path)
-driver.get("https://web.whatsapp.com/") 
-wait = WebDriverWait(driver, 600) 
+def class WActions:
 
-# Replace 'Friend's Name' with the name of your friend 
-# or the name of a group 
-target = "Christian Roomie"
+    def __init__(self, driver_path):
+        self.driver = webdriver.Chrome(driver_path)
+        self.driver.get(WHATSAPP_URL) 
+        self.wait = WebDriverWait(driver, 600) 
 
-# Replace the below string with your own message 
-string = "Message sent using Python!!!"
+    def write_chat(self, msg):
+        # Enter char is included
+        input_box = self.wait.until(
+            EC.presence_of_element_located((By.XPATH, XPATH_CHAT_INPUT))
+        )
+        input_box.click()
+        keyboard.write(msg + "\n")
+        time.sleep(1)
+    
+    def new_chat(self):
+        new_chat = self.wait.until(
+            EC.presence_of_element_located((By.XPATH, XPATH_NEW_CHAT))
+        )
+        new_chat.click()
 
-x_arg = "//span[contains(@title,'" + target + "')]"
-chat_title = wait.until(
-    EC.presence_of_element_located((By.XPATH, x_arg))
-)
-print("item:", str(chat_title))
-chat_title.click()
-inp_xpath = "//div[@contenteditable='true'][@data-tab='1'][@spellcheck='true']"
-input_box = wait.until(
-    EC.presence_of_element_located((By.XPATH, inp_xpath))
-)
-for i in range(100):
-    input_box.click()
-    keyboard.write(string + "\n")
-    time.sleep(1) 
+    def search(self, keyword)
+        # keyword should be at least 3 char long
+        keyboard.write(keyboard)
+
+    def search_select(self, keyword)
+        # keyword should be at least 3 char long
+        keyboard.write(keyboard + "\n")
+
+    def select_elem(self, elem_no = 1):
+        element = self.wait.until(
+            EC.presence_of_element_located((By.XPATH, XPATH_ELEMENT.format(elem_no)))
+        )
+        element.click()
+
+    def open_chat(self):
+        chat_title = self.wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, XPATH_EXISTING_CHAT.format(target))
+            )
+        )
+        chat_title.click()
+
