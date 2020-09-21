@@ -1,20 +1,16 @@
-
-import os
 import keyboard
 from selenium import webdriver 
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC 
 from selenium.webdriver.common.keys import Keys 
 from selenium.webdriver.common.by import By
-import time
-import consts
 
-def class WActions:
+class WActions:
 
     def __init__(self, driver_path):
         self.driver = webdriver.Chrome(driver_path)
         self.driver.get(WHATSAPP_URL) 
-        self.wait = WebDriverWait(driver, 600) 
+        self.wait = WebDriverWait(self.driver, 600) 
 
     def write_chat(self, msg):
         # Enter char is included
@@ -23,7 +19,6 @@ def class WActions:
         )
         input_box.click()
         keyboard.write(msg + "\n")
-        time.sleep(1)
     
     def new_chat(self):
         new_chat = self.wait.until(
@@ -31,11 +26,11 @@ def class WActions:
         )
         new_chat.click()
 
-    def search(self, keyword)
+    def search(self, keyword):
         # keyword should be at least 3 char long
         keyboard.write(keyboard)
 
-    def search_select(self, keyword)
+    def search_select(self, keyword):
         # keyword should be at least 3 char long
         keyboard.write(keyboard + "\n")
 
